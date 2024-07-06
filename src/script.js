@@ -1,24 +1,8 @@
 // Grab user input and display the temeperature for that city
 // and display it on the screen
 
-function formatDate() {
-  let date = new Date();
-  console.log(date);
-
-  //   let monthsOfYear = [
-  //     "January",
-  //     "February",
-  //     "March",
-  //     "April",
-  //     "May",
-  //     "June",
-  //     "July",
-  //     "August",
-  //     "September",
-  //     "October",
-  //     "November",
-  //     "December",
-  //   ];
+function formatDate(date) {
+  //   let date = new Date();
 
   let daysOfWeek = [
     "Sunday",
@@ -30,17 +14,14 @@ function formatDate() {
     "Saturday",
   ];
   let currentDay = daysOfWeek[date.getDay()];
-  //   let currentMonth = monthsOfYear[date.getMonth()];
-
   let day = date.getDay();
-  //   let year = date.getFullYear();
-
   let hour = date.getHours();
   let minutes = date.getMinutes();
 
   if (day < 10) {
     day = `0${day}`;
   }
+
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
@@ -52,11 +33,24 @@ function updateWeather(response) {
   let temperature = Math.round(response.data.temperature.current);
   let tempVal = document.querySelector("#temperature");
   let dayAndTime = document.querySelector("#day-and-time");
+  let date = new Date(response.data.time * 1000);
+  console.log(date);
   let cityElement = document.querySelector("#city-of-choice");
+  let weatherCondition = document.querySelector("#weather-condition");
+  let humidity = document.querySelector("#humidity");
+  let humidityVal = response.data.temperature.humidity;
+  let wind = document.querySelector("#wind");
+  let windVal = response.data.wind.speed;
+  //   let weatherIconImage = document.querySelector("#weather-icon");
+  //   let weatherIcon = response.data.condition.icon;
 
+  console.log(response.data);
+  //   weatherIconImage.innerHTML = weatherIcon;
+  humidity.innerHTML = `${humidityVal}%`;
+  wind.innerHTML = `${windVal} km/hr`;
+  weatherCondition.innerHTML = response.data.condition.description;
   cityElement.innerHTML = response.data.city;
-  console.log(response.data.city);
-  dayAndTime.innerHTML = formatDate();
+  dayAndTime.innerHTML = formatDate(date);
   tempVal.innerHTML = temperature;
 }
 
