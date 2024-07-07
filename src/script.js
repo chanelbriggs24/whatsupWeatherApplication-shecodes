@@ -41,11 +41,16 @@ function updateWeather(response) {
   let humidityVal = response.data.temperature.humidity;
   let wind = document.querySelector("#wind");
   let windVal = response.data.wind.speed;
-  //   let weatherIconImage = document.querySelector("#weather-icon");
-  //   let weatherIcon = response.data.condition.icon;
+  let weatherIconImage = document.querySelector("#weather-icon");
+  console.log(response.data);
+  let weatherIcon = response.data.condition.icon_url;
 
   console.log(response.data);
-  //   weatherIconImage.innerHTML = weatherIcon;
+  weatherIconImage.innerHTML = ` <img
+                src="${weatherIcon}"
+                alt=""
+                class="weather-app-icon"
+              />`;
   humidity.innerHTML = `${humidityVal}%`;
   wind.innerHTML = `${windVal} km/hr`;
   weatherCondition.innerHTML = response.data.condition.description;
