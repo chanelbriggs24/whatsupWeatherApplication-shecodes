@@ -2,8 +2,6 @@
 // and display it on the screen
 
 function formatDate(date) {
-  //   let date = new Date();
-
   let daysOfWeek = [
     "Sunday",
     "Monday",
@@ -14,13 +12,10 @@ function formatDate(date) {
     "Saturday",
   ];
   let currentDay = daysOfWeek[date.getDay()];
-  let day = date.getDay();
+  console.log(currentDay);
+  //   let day = date.getDay();
   let hour = date.getHours();
   let minutes = date.getMinutes();
-
-  if (day < 10) {
-    day = `0${day}`;
-  }
 
   if (minutes < 10) {
     minutes = `0${minutes}`;
@@ -75,12 +70,17 @@ function searchEvent(event) {
   let cityName = document.querySelector(".weather-app-city");
   cityName.innerHTML = cityVal.value;
   searchCity(cityVal.value);
-
-  formatDate();
 }
 
 let citySearch = document.querySelector(".search-form");
 citySearch.addEventListener("submit", searchEvent);
+
+function formatDay(timestamp) {
+  let day = new Date(timestamp * 1000);
+  let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return daysOfWeek[day.getDay()];
+}
 
 function getForecastData(city) {
   let apiKey = `abf74f3d08ac0ba0527t801bd8o47a65`;
@@ -90,9 +90,6 @@ function getForecastData(city) {
 }
 
 function displayForecast(response) {
-  console.log(response.data);
-
-  let daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   //   // This code takes the array of daysOfWeek and it will loop through
   //   //each element and perform the function below on each item in the array
 
@@ -101,18 +98,24 @@ function displayForecast(response) {
   //   //be concatenated to the string of variables instead of it being overwritten
   let forecastInfo = ``;
 
-  daysOfWeek.forEach(function (day) {
-    forecastInfo += `<div class="weather-forecast-day">
-     <div class="weather-forecast-weekday">${day}</div>
-     <div class="weather-forecast-icon">⛅</div>
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastInfo =
+        forecastInfo +
+        `<div class="weather-forecast-day">
+     <div class="weather-forecast-weekday">${formatDay(day.time)}</div>
+     <img src="${day.condition.icon_url}" class="weather-forecast-icon"/>
      <div class="weather-forecast-temp">
        <div class="weather-forecast-tempRange">
-         <strong>15&deg;</strong>
+         <strong>${Math.round(day.temperature.maximum)}&deg;</strong>
        </div>
-       <div class="weather-forecast-tempRange">9&deg;</div>
+       <div class="weather-forecast-tempRange">${Math.round(
+         day.temperature.minimum
+       )}&deg;</div>
      </div>
    </div>
  `;
+    }
   });
 
   let forecast = document.querySelector("#forecast");
