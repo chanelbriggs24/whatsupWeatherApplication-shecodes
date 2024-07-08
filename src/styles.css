@@ -5,12 +5,17 @@ with the padding, margin, and font-size */
 body {
   background-image: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/132/269/original/blue-sky-skyscape-background-concept-free-vector.jpg?1720471320");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100vw 100vh;
   font-family: "Roboto", sans-serif;
 }
 
 .weather-app {
-  background: white;
+  /* background: white; */
+  background: radial-gradient(
+    circle at 0.7% 1%,
+    rgb(215, 248, 247) 0%,
+    rgb(102, 188, 239) 100.2%
+  );
   opacity: 1;
   max-width: 600px;
   /* Margin 0 auto centers an element without display block */
@@ -43,6 +48,11 @@ header {
   border: none;
   border-radius: 6px;
   padding: 15px 30px;
+  transition: all 200ms ease-in-out;
+}
+
+.search-submit:hover {
+  background: #b1e0e2;
   cursor: pointer;
 }
 
