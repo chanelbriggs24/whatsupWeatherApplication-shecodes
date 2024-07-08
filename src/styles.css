@@ -3,12 +3,15 @@
 80% and let the form button take the remaining space. You can stretch the button by playing around
 with the padding, margin, and font-size */
 body {
-  background: #f7f5fd;
+  background-image: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/132/269/original/blue-sky-skyscape-background-concept-free-vector.jpg?1720471320");
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: "Roboto", sans-serif;
 }
 
 .weather-app {
   background: white;
+  opacity: 1;
   max-width: 600px;
   /* Margin 0 auto centers an element without display block */
   margin: 45px auto;
@@ -33,7 +36,7 @@ header {
 }
 
 .search-submit {
-  background-color: #885df1;
+  background-color: #138acc;
   color: white;
   font-size: 16px;
   margin-left: 5px;
@@ -66,7 +69,7 @@ main {
 }
 
 .weather-app-description strong {
-  color: #f85282;
+  color: #138acc;
 }
 
 .weather-app-temp-display {
@@ -114,9 +117,13 @@ main {
 .weather-forecast-temp {
   text-align: center;
   margin-top: 10px;
-  color: #f85282;
+  color: #138acc;
   display: flex;
   justify-content: center;
+}
+
+.weather-forecast-temp:hover {
+  scale: 1.5;
 }
 
 .weather-forecast-tempRange {
@@ -132,5 +139,5 @@ footer {
 }
 
 a {
-  color: #885df1;
+  color: #138acc;
 }

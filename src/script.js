@@ -12,8 +12,6 @@ function formatDate(date) {
     "Saturday",
   ];
   let currentDay = daysOfWeek[date.getDay()];
-  console.log(currentDay);
-  //   let day = date.getDay();
   let hour = date.getHours();
   let minutes = date.getMinutes();
 
@@ -29,7 +27,6 @@ function updateWeather(response) {
   let tempVal = document.querySelector("#temperature");
   let dayAndTime = document.querySelector("#day-and-time");
   let date = new Date(response.data.time * 1000);
-  console.log(date);
   let cityElement = document.querySelector("#city-of-choice");
   let weatherCondition = document.querySelector("#weather-condition");
   let humidity = document.querySelector("#humidity");
@@ -37,10 +34,8 @@ function updateWeather(response) {
   let wind = document.querySelector("#wind");
   let windVal = response.data.wind.speed;
   let weatherIconImage = document.querySelector("#weather-icon");
-  console.log(response.data);
   let weatherIcon = response.data.condition.icon_url;
 
-  console.log(response.data);
   weatherIconImage.innerHTML = ` <img
                 src="${weatherIcon}"
                 alt=""
@@ -103,18 +98,20 @@ function displayForecast(response) {
       forecastInfo =
         forecastInfo +
         `<div class="weather-forecast-day">
-     <div class="weather-forecast-weekday">${formatDay(day.time)}</div>
-     <img src="${day.condition.icon_url}" class="weather-forecast-icon"/>
-     <div class="weather-forecast-temp">
-       <div class="weather-forecast-tempRange">
-         <strong>${Math.round(day.temperature.maximum)}&deg;</strong>
-       </div>
-       <div class="weather-forecast-tempRange">${Math.round(
-         day.temperature.minimum
-       )}&deg;</div>
-     </div>
-   </div>
- `;
+            <div class="weather-forecast-weekday">${formatDay(day.time)}</div>
+            <img src="${day.condition.icon_url}" class="weather-forecast-icon"/>
+                <div class="weather-forecast-temp">
+                    <div class="weather-forecast-tempRange">
+                        <strong>${Math.round(
+                          day.temperature.maximum
+                        )}&deg;</strong>
+                    </div>
+                    <div class="weather-forecast-tempRange">${Math.round(
+                      day.temperature.minimum
+                    )}&deg;</div>
+                </div>
+        </div>
+    `;
     }
   });
 
@@ -150,4 +147,4 @@ function displayForecast(response) {
 //   forecast.innerHTML = forecastInfo;
 // }
 
-searchCity("Paris");
+searchCity("Charlotte");
