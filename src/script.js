@@ -23,29 +23,33 @@ function formatDate(date) {
 }
 
 function updateWeather(response) {
-  let temperature = Math.round(response.data.temperature.current);
   let tempVal = document.querySelector("#temperature");
+  let temperature = Math.round(response.data.temperature.current);
+
   let dayAndTime = document.querySelector("#day-and-time");
   let date = new Date(response.data.time * 1000);
+
   let cityElement = document.querySelector("#city-of-choice");
   let weatherCondition = document.querySelector("#weather-condition");
   let humidity = document.querySelector("#humidity");
-  let humidityVal = response.data.temperature.humidity;
   let wind = document.querySelector("#wind");
-  let windVal = response.data.wind.speed;
   let weatherIconImage = document.querySelector("#weather-icon");
+
+  let humidityVal = response.data.temperature.humidity;
+  let windVal = response.data.wind.speed;
   let weatherIcon = response.data.condition.icon_url;
 
+  dayAndTime.innerHTML = formatDate(date);
+  cityElement.innerHTML = response.data.city;
+  console.log(cityElement);
+  weatherCondition.innerHTML = response.data.condition.description;
+  humidity.innerHTML = `${humidityVal}%`;
+  wind.innerHTML = `${windVal} km/hr`;
   weatherIconImage.innerHTML = ` <img
                 src="${weatherIcon}"
                 alt=""
                 class="weather-app-icon"
               />`;
-  humidity.innerHTML = `${humidityVal}%`;
-  wind.innerHTML = `${windVal} km/hr`;
-  weatherCondition.innerHTML = response.data.condition.description;
-  cityElement.innerHTML = response.data.city;
-  dayAndTime.innerHTML = formatDate(date);
   tempVal.innerHTML = temperature;
 
   getForecastData(response.data.city);
@@ -62,8 +66,6 @@ function searchCity(city) {
 function searchEvent(event) {
   event.preventDefault();
   let cityVal = document.querySelector("#city");
-  let cityName = document.querySelector(".weather-app-city");
-  cityName.innerHTML = cityVal.value;
   searchCity(cityVal.value);
 }
 
@@ -91,10 +93,13 @@ function displayForecast(response) {
   //   //This variable that has an empty string will store each element forecast
   //   //after the loop performs the function on the day and then the next element will
   //   //be concatenated to the string of variables instead of it being overwritten
+
+  console.log(response.data);
+
   let forecastInfo = ``;
 
   response.data.daily.forEach(function (day, index) {
-    if (index < 5) {
+    if (index > 0 && index < 6) {
       forecastInfo =
         forecastInfo +
         `<div class="weather-forecast-day">
