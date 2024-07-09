@@ -44,7 +44,7 @@ function updateWeather(response) {
 
   weatherCondition.innerHTML = response.data.condition.description;
   humidity.innerHTML = `${humidityVal}%`;
-  wind.innerHTML = `${windVal} km/hr`;
+  wind.innerHTML = `${windVal} mph`;
   weatherIconImage.innerHTML = ` <img
                 src="${weatherIcon}"
                 alt=""
