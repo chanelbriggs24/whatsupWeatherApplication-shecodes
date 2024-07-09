@@ -131,9 +131,11 @@ main {
   color: #138acc;
   display: flex;
   justify-content: center;
+  transition: all 200ms ease-in-out;
 }
 
 .weather-forecast-temp:hover {
+  cursor: pointer;
   scale: 1.5;
 }
 

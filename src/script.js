@@ -75,7 +75,6 @@ citySearch.addEventListener("submit", searchEvent);
 function formatDay(timestamp) {
   let day = new Date(timestamp * 1000);
   let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
   return daysOfWeek[day.getDay()];
 }
 
@@ -93,12 +92,13 @@ function displayForecast(response) {
   //   //This variable that has an empty string will store each element forecast
   //   //after the loop performs the function on the day and then the next element will
   //   //be concatenated to the string of variables instead of it being overwritten
-
-  console.log(response.data);
-
   let forecastInfo = ``;
 
   response.data.daily.forEach(function (day, index) {
+    // The forecast API returns an array with days where the first element of the array is the
+    // current day. With this, if you exclude the first item and start on the second, then it'll
+    // always start on "tomorrow" because the days returned by the api are also dynamic and will
+    // change as the days change
     if (index > 0 && index < 6) {
       forecastInfo =
         forecastInfo +
