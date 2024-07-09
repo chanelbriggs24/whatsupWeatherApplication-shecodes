@@ -41,7 +41,7 @@ function updateWeather(response) {
 
   dayAndTime.innerHTML = formatDate(date);
   cityElement.innerHTML = response.data.city;
-  console.log(cityElement);
+
   weatherCondition.innerHTML = response.data.condition.description;
   humidity.innerHTML = `${humidityVal}%`;
   wind.innerHTML = `${windVal} km/hr`;
